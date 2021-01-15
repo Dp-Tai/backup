@@ -1,0 +1,669 @@
+
+Node_Sensor.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000372  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  000003e6  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000024  00800060  00800060  000003e6  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000003e6  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000418  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000078  00000000  00000000  00000454  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   000007cb  00000000  00000000  000004cc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 000005eb  00000000  00000000  00000c97  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   0000043c  00000000  00000000  00001282  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  0000014c  00000000  00000000  000016c0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000469  00000000  00000000  0000180c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000266  00000000  00000000  00001c75  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000068  00000000  00000000  00001edb  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	21 c0       	rjmp	.+66     	; 0x46 <__bad_interrupt>
+   4:	20 c0       	rjmp	.+64     	; 0x46 <__bad_interrupt>
+   6:	1f c0       	rjmp	.+62     	; 0x46 <__bad_interrupt>
+   8:	1e c0       	rjmp	.+60     	; 0x46 <__bad_interrupt>
+   a:	1d c0       	rjmp	.+58     	; 0x46 <__bad_interrupt>
+   c:	1c c0       	rjmp	.+56     	; 0x46 <__bad_interrupt>
+   e:	1b c0       	rjmp	.+54     	; 0x46 <__bad_interrupt>
+  10:	c9 c0       	rjmp	.+402    	; 0x1a4 <__vector_8>
+  12:	53 c1       	rjmp	.+678    	; 0x2ba <__vector_9>
+  14:	18 c0       	rjmp	.+48     	; 0x46 <__bad_interrupt>
+  16:	8d c1       	rjmp	.+794    	; 0x332 <__vector_11>
+  18:	16 c0       	rjmp	.+44     	; 0x46 <__bad_interrupt>
+  1a:	15 c0       	rjmp	.+42     	; 0x46 <__bad_interrupt>
+  1c:	14 c0       	rjmp	.+40     	; 0x46 <__bad_interrupt>
+  1e:	13 c0       	rjmp	.+38     	; 0x46 <__bad_interrupt>
+  20:	12 c0       	rjmp	.+36     	; 0x46 <__bad_interrupt>
+  22:	11 c0       	rjmp	.+34     	; 0x46 <__bad_interrupt>
+  24:	10 c0       	rjmp	.+32     	; 0x46 <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_clear_bss>:
+  32:	20 e0       	ldi	r18, 0x00	; 0
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	01 c0       	rjmp	.+2      	; 0x3c <.do_clear_bss_start>
+
+0000003a <.do_clear_bss_loop>:
+  3a:	1d 92       	st	X+, r1
+
+0000003c <.do_clear_bss_start>:
+  3c:	a4 38       	cpi	r26, 0x84	; 132
+  3e:	b2 07       	cpc	r27, r18
+  40:	e1 f7       	brne	.-8      	; 0x3a <.do_clear_bss_loop>
+  42:	a4 d0       	rcall	.+328    	; 0x18c <main>
+  44:	94 c1       	rjmp	.+808    	; 0x36e <_exit>
+
+00000046 <__bad_interrupt>:
+  46:	dc cf       	rjmp	.-72     	; 0x0 <__vectors>
+
+00000048 <_Z9Gpio_inithi>:
+	port: port name, B or C or D 
+	type: set mode working: 0 - input, 1 - output	
+*/
+bool Gpio_init(unsigned char port, int type)
+{
+	switch (port)
+  48:	83 34       	cpi	r24, 0x43	; 67
+  4a:	39 f0       	breq	.+14     	; 0x5a <_Z9Gpio_inithi+0x12>
+  4c:	84 34       	cpi	r24, 0x44	; 68
+  4e:	41 f0       	breq	.+16     	; 0x60 <_Z9Gpio_inithi+0x18>
+  50:	82 34       	cpi	r24, 0x42	; 66
+  52:	49 f4       	brne	.+18     	; 0x66 <_Z9Gpio_inithi+0x1e>
+	{
+		//  case 'A':
+		//       DDRA = type;
+		//      break;
+		case 'B':
+		DDRB = type;
+  54:	67 bb       	out	0x17, r22	; 23
+		break;
+		default:
+		return FALSE;
+		break;
+	}
+	return TRUE;
+  56:	81 e0       	ldi	r24, 0x01	; 1
+		//  case 'A':
+		//       DDRA = type;
+		//      break;
+		case 'B':
+		DDRB = type;
+		break;
+  58:	08 95       	ret
+		case 'C':
+		DDRC = type;
+  5a:	64 bb       	out	0x14, r22	; 20
+		break;
+		default:
+		return FALSE;
+		break;
+	}
+	return TRUE;
+  5c:	81 e0       	ldi	r24, 0x01	; 1
+		case 'B':
+		DDRB = type;
+		break;
+		case 'C':
+		DDRC = type;
+		break;
+  5e:	08 95       	ret
+		case 'D':
+		DDRD = type;
+  60:	61 bb       	out	0x11, r22	; 17
+		break;
+		default:
+		return FALSE;
+		break;
+	}
+	return TRUE;
+  62:	81 e0       	ldi	r24, 0x01	; 1
+		case 'C':
+		DDRC = type;
+		break;
+		case 'D':
+		DDRD = type;
+		break;
+  64:	08 95       	ret
+		default:
+		return FALSE;
+  66:	80 e0       	ldi	r24, 0x00	; 0
+		break;
+	}
+	return TRUE;
+};
+  68:	08 95       	ret
+
+0000006a <_Z10timer_initi>:
+	1: timer 1 - 16 bit
+	2: timer 0 - 8 bit and timer 1 - 16 bit - mode overflow interrupt
+*/
+bool timer_init(int timer_number)
+{
+	if (timer_number == 0)
+  6a:	00 97       	sbiw	r24, 0x00	; 0
+  6c:	79 f4       	brne	.+30     	; 0x8c <_Z10timer_initi+0x22>
+	{
+		TCCR0 = 2; // set prescale 8 , F_CPU = 12mhz
+  6e:	82 e0       	ldi	r24, 0x02	; 2
+  70:	83 bf       	out	0x33, r24	; 51
+		//TOIE0 |= 1; // enable overflow interrupt
+		// initialize counter
+		TCNT0 = 0; 
+  72:	12 be       	out	0x32, r1	; 50
+	    // enable overflow interrupt
+		TIMSK |= (1 << TOIE0);
+  74:	89 b7       	in	r24, 0x39	; 57
+  76:	81 60       	ori	r24, 0x01	; 1
+  78:	89 bf       	out	0x39, r24	; 57
+	    
+		// initialize overflow counter variable
+		timer0_cnt = 0;
+  7a:	10 92 68 00 	sts	0x0068, r1	; 0x800068 <timer0_cnt>
+  7e:	10 92 69 00 	sts	0x0069, r1	; 0x800069 <timer0_cnt+0x1>
+  82:	10 92 6a 00 	sts	0x006A, r1	; 0x80006a <timer0_cnt+0x2>
+  86:	10 92 6b 00 	sts	0x006B, r1	; 0x80006b <timer0_cnt+0x3>
+  8a:	08 95       	ret
+	}
+	else if (timer_number == 1)
+  8c:	01 97       	sbiw	r24, 0x01	; 1
+  8e:	b1 f4       	brne	.+44     	; 0xbc <_Z10timer_initi+0x52>
+	{
+		TCCR1B |= 0x2; // prescale  = 8
+  90:	8e b5       	in	r24, 0x2e	; 46
+  92:	82 60       	ori	r24, 0x02	; 2
+  94:	8e bd       	out	0x2e, r24	; 46
+		TIMSK |= 0x4; // overflow interrupt
+  96:	89 b7       	in	r24, 0x39	; 57
+  98:	84 60       	ori	r24, 0x04	; 4
+  9a:	89 bf       	out	0x39, r24	; 57
+		TCNT1 = 0; // initialize value for timer 1
+  9c:	1d bc       	out	0x2d, r1	; 45
+  9e:	1c bc       	out	0x2c, r1	; 44
+		ICR1 = 50000; // set top - MAX VALUE = 50000, timer counter = 30 ~ 1s 
+  a0:	80 e5       	ldi	r24, 0x50	; 80
+  a2:	93 ec       	ldi	r25, 0xC3	; 195
+  a4:	97 bd       	out	0x27, r25	; 39
+  a6:	86 bd       	out	0x26, r24	; 38
+		
+		// enable global interrupts
+		sei();
+  a8:	78 94       	sei
+				
+		// initialize overflow counter variable
+		timer1_cnt = 0;
+  aa:	10 92 64 00 	sts	0x0064, r1	; 0x800064 <timer1_cnt>
+  ae:	10 92 65 00 	sts	0x0065, r1	; 0x800065 <timer1_cnt+0x1>
+  b2:	10 92 66 00 	sts	0x0066, r1	; 0x800066 <timer1_cnt+0x2>
+  b6:	10 92 67 00 	sts	0x0067, r1	; 0x800067 <timer1_cnt+0x3>
+  ba:	08 95       	ret
+	}
+	else
+	{
+		TCCR0 = 2; // set prescale 8
+  bc:	82 e0       	ldi	r24, 0x02	; 2
+  be:	83 bf       	out	0x33, r24	; 51
+		//TOIE0 |= 1; // enable overflow interrupt
+		// initialize counter
+		TCNT0 = 0;
+  c0:	12 be       	out	0x32, r1	; 50
+		// enable overflow interrupt
+		TIMSK |= (1 << TOIE0);
+  c2:	89 b7       	in	r24, 0x39	; 57
+  c4:	81 60       	ori	r24, 0x01	; 1
+  c6:	89 bf       	out	0x39, r24	; 57
+		
+		// timer 2 setting
+		TCCR1B |= 0x2; // prescale  = 8
+  c8:	8e b5       	in	r24, 0x2e	; 46
+  ca:	82 60       	ori	r24, 0x02	; 2
+  cc:	8e bd       	out	0x2e, r24	; 46
+		TIMSK |= 0x4; // overflow interrupt
+  ce:	89 b7       	in	r24, 0x39	; 57
+  d0:	84 60       	ori	r24, 0x04	; 4
+  d2:	89 bf       	out	0x39, r24	; 57
+		TCNT1 = 0; // initialize value for timer 1
+  d4:	1d bc       	out	0x2d, r1	; 45
+  d6:	1c bc       	out	0x2c, r1	; 44
+		ICR1 = 50000; // set top = 50000, timer counter = 30 ~ 1s
+  d8:	80 e5       	ldi	r24, 0x50	; 80
+  da:	93 ec       	ldi	r25, 0xC3	; 195
+  dc:	97 bd       	out	0x27, r25	; 39
+  de:	86 bd       	out	0x26, r24	; 38
+		
+		// enable global interrupts
+		sei();
+  e0:	78 94       	sei
+		
+		// initialize overflow counter variable
+		timer0_cnt = 0;	
+  e2:	10 92 68 00 	sts	0x0068, r1	; 0x800068 <timer0_cnt>
+  e6:	10 92 69 00 	sts	0x0069, r1	; 0x800069 <timer0_cnt+0x1>
+  ea:	10 92 6a 00 	sts	0x006A, r1	; 0x80006a <timer0_cnt+0x2>
+  ee:	10 92 6b 00 	sts	0x006B, r1	; 0x80006b <timer0_cnt+0x3>
+		timer1_cnt = 0;
+  f2:	10 92 64 00 	sts	0x0064, r1	; 0x800064 <timer1_cnt>
+  f6:	10 92 65 00 	sts	0x0065, r1	; 0x800065 <timer1_cnt+0x1>
+  fa:	10 92 66 00 	sts	0x0066, r1	; 0x800066 <timer1_cnt+0x2>
+  fe:	10 92 67 00 	sts	0x0067, r1	; 0x800067 <timer1_cnt+0x3>
+	}
+}
+ 102:	08 95       	ret
+
+00000104 <_Z9uart_initv>:
+
+// initialize uart
+void uart_init()
+{
+	//set baud, 57.6k ung voi f=8Mhz, xem bang 70 trang 165, Atmega32 datasheet
+	UBRRH=0;
+ 104:	10 bc       	out	0x20, r1	; 32
+	UBRRL=77;
+ 106:	8d e4       	ldi	r24, 0x4D	; 77
+ 108:	89 b9       	out	0x09, r24	; 9
+	
+	//set khung truyen va kich hoat bo nhan du lieu
+	UCSRA=0x00;
+ 10a:	1b b8       	out	0x0b, r1	; 11
+	UCSRC=(1<<URSEL)|(1<<UCSZ1)|(1<<UCSZ0);
+ 10c:	86 e8       	ldi	r24, 0x86	; 134
+ 10e:	80 bd       	out	0x20, r24	; 32
+	UCSRB=(1<<TXEN);
+ 110:	88 e0       	ldi	r24, 0x08	; 8
+ 112:	8a b9       	out	0x0a, r24	; 10
+ 114:	08 95       	ret
+
+00000116 <_Z8adc_initv>:
+}
+// initialize adc
+void adc_init()
+{
+	// AREF = AVcc
+	ADMUX = (1<<REFS0);
+ 116:	80 e4       	ldi	r24, 0x40	; 64
+ 118:	87 b9       	out	0x07, r24	; 7
+	
+	// ADC Enable and prescaler of 128
+	// 16000000/128 = 125000
+	ADCSRA = (1<<ADEN)|(1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0);
+ 11a:	87 e8       	ldi	r24, 0x87	; 135
+ 11c:	86 b9       	out	0x06, r24	; 6
+	
+	ADC_value_raw = 0;
+ 11e:	10 92 6f 00 	sts	0x006F, r1	; 0x80006f <ADC_value_raw+0x1>
+ 122:	10 92 6e 00 	sts	0x006E, r1	; 0x80006e <ADC_value_raw>
+ 126:	08 95       	ret
+
+00000128 <_Z4initv>:
+    }
+}
+
+void init()
+{
+	memset(ADC_array,0,ADC_ARRAY_SIZE);
+ 128:	8a e0       	ldi	r24, 0x0A	; 10
+ 12a:	e0 e7       	ldi	r30, 0x70	; 112
+ 12c:	f0 e0       	ldi	r31, 0x00	; 0
+ 12e:	df 01       	movw	r26, r30
+ 130:	1d 92       	st	X+, r1
+ 132:	8a 95       	dec	r24
+ 134:	e9 f7       	brne	.-6      	; 0x130 <_Z4initv+0x8>
+	ADC_value = 0;
+ 136:	10 92 6d 00 	sts	0x006D, r1	; 0x80006d <ADC_value>
+	Global_counter_1 = 0;
+ 13a:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 13e:	10 92 61 00 	sts	0x0061, r1	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 142:	10 92 62 00 	sts	0x0062, r1	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
+ 146:	10 92 63 00 	sts	0x0063, r1	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
+	uart_send_flag = false;
+ 14a:	10 92 6c 00 	sts	0x006C, r1	; 0x80006c <uart_send_flag>
+	Gpio_init('C',0xf);
+ 14e:	6f e0       	ldi	r22, 0x0F	; 15
+ 150:	70 e0       	ldi	r23, 0x00	; 0
+ 152:	83 e4       	ldi	r24, 0x43	; 67
+ 154:	79 df       	rcall	.-270    	; 0x48 <_Z9Gpio_inithi>
+	timer_init(3);
+ 156:	83 e0       	ldi	r24, 0x03	; 3
+ 158:	90 e0       	ldi	r25, 0x00	; 0
+ 15a:	87 df       	rcall	.-242    	; 0x6a <_Z10timer_initi>
+	adc_init();
+ 15c:	dc df       	rcall	.-72     	; 0x116 <_Z8adc_initv>
+	uart_init();
+ 15e:	d2 df       	rcall	.-92     	; 0x104 <_Z9uart_initv>
+ 160:	08 95       	ret
+
+00000162 <_Z8adc_readh>:
+void adc_read(uint8_t ch)
+{
+	// select the corresponding channel 0~7
+	// ANDing with '7' will always keep the value
+	// of 'ch' between 0 and 7
+	ch &= 0b00000111;  // AND operation with 7
+ 162:	87 70       	andi	r24, 0x07	; 7
+	ADMUX = (ADMUX & 0xF8)|ch;     // clears the bottom 3 bits before ORing
+ 164:	97 b1       	in	r25, 0x07	; 7
+ 166:	98 7f       	andi	r25, 0xF8	; 248
+ 168:	89 2b       	or	r24, r25
+ 16a:	87 b9       	out	0x07, r24	; 7
+	
+	// start single conversion
+	// write '1' to ADSC
+	ADCSRA |= (1<<ADSC);
+ 16c:	86 b1       	in	r24, 0x06	; 6
+ 16e:	80 64       	ori	r24, 0x40	; 64
+ 170:	86 b9       	out	0x06, r24	; 6
+	
+	// wait for conversion to complete
+	// ADSC becomes '0' again
+	// till then, run loop continuously
+	while(ADCSRA & (1<<ADSC));
+ 172:	36 99       	sbic	0x06, 6	; 6
+ 174:	fe cf       	rjmp	.-4      	; 0x172 <_Z8adc_readh+0x10>
+	
+	ADC_value_raw = ADC;
+ 176:	84 b1       	in	r24, 0x04	; 4
+ 178:	95 b1       	in	r25, 0x05	; 5
+ 17a:	90 93 6f 00 	sts	0x006F, r25	; 0x80006f <ADC_value_raw+0x1>
+ 17e:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <ADC_value_raw>
+ 182:	08 95       	ret
+
+00000184 <_Z12uart_char_txh>:
+}
+
+//UART send data
+void uart_char_tx(unsigned char chr){
+	while (bit_is_clear(UCSRA,UDRE)) {}; //when bit UDRE=1, buffer is clear
+ 184:	5d 9b       	sbis	0x0b, 5	; 11
+ 186:	fe cf       	rjmp	.-4      	; 0x184 <_Z12uart_char_txh>
+	UDR=chr;
+ 188:	8c b9       	out	0x0c, r24	; 12
+ 18a:	08 95       	ret
+
+0000018c <main>:
+volatile long int Global_counter_1; // counter 1s
+
+int main(void)
+{
+	// enable all the interrupt
+	__Interrupt_Enable__;
+ 18c:	78 94       	sei
+	
+    /* Replace with your application code */
+	init();	
+ 18e:	cc df       	rcall	.-104    	; 0x128 <_Z4initv>
+    while (1) 
+    {
+		if (uart_send_flag)
+ 190:	80 91 6c 00 	lds	r24, 0x006C	; 0x80006c <uart_send_flag>
+ 194:	88 23       	and	r24, r24
+ 196:	e1 f3       	breq	.-8      	; 0x190 <main+0x4>
+		{
+			uart_char_tx(ADC_value);
+ 198:	80 91 6d 00 	lds	r24, 0x006D	; 0x80006d <ADC_value>
+ 19c:	f3 df       	rcall	.-26     	; 0x184 <_Z12uart_char_txh>
+			uart_send_flag = false;
+ 19e:	10 92 6c 00 	sts	0x006C, r1	; 0x80006c <uart_send_flag>
+ 1a2:	f6 cf       	rjmp	.-20     	; 0x190 <main+0x4>
+
+000001a4 <__vector_8>:
+}
+
+// TIMER1 overflow interrupt service routine
+// called whenever TCNT1 overflows
+ISR(TIMER1_OVF_vect)
+{
+ 1a4:	1f 92       	push	r1
+ 1a6:	0f 92       	push	r0
+ 1a8:	0f b6       	in	r0, 0x3f	; 63
+ 1aa:	0f 92       	push	r0
+ 1ac:	11 24       	eor	r1, r1
+ 1ae:	2f 93       	push	r18
+ 1b0:	3f 93       	push	r19
+ 1b2:	4f 93       	push	r20
+ 1b4:	5f 93       	push	r21
+ 1b6:	6f 93       	push	r22
+ 1b8:	7f 93       	push	r23
+ 1ba:	8f 93       	push	r24
+ 1bc:	9f 93       	push	r25
+ 1be:	af 93       	push	r26
+ 1c0:	bf 93       	push	r27
+ 1c2:	ef 93       	push	r30
+ 1c4:	ff 93       	push	r31
+	// keep a track of number of overflows
+	timer1_cnt++;
+ 1c6:	80 91 64 00 	lds	r24, 0x0064	; 0x800064 <timer1_cnt>
+ 1ca:	90 91 65 00 	lds	r25, 0x0065	; 0x800065 <timer1_cnt+0x1>
+ 1ce:	a0 91 66 00 	lds	r26, 0x0066	; 0x800066 <timer1_cnt+0x2>
+ 1d2:	b0 91 67 00 	lds	r27, 0x0067	; 0x800067 <timer1_cnt+0x3>
+ 1d6:	01 96       	adiw	r24, 0x01	; 1
+ 1d8:	a1 1d       	adc	r26, r1
+ 1da:	b1 1d       	adc	r27, r1
+ 1dc:	80 93 64 00 	sts	0x0064, r24	; 0x800064 <timer1_cnt>
+ 1e0:	90 93 65 00 	sts	0x0065, r25	; 0x800065 <timer1_cnt+0x1>
+ 1e4:	a0 93 66 00 	sts	0x0066, r26	; 0x800066 <timer1_cnt+0x2>
+ 1e8:	b0 93 67 00 	sts	0x0067, r27	; 0x800067 <timer1_cnt+0x3>
+	
+	// sample of ADC: 1 sample in 1 second
+	// when timer 1 overflow 30 times ~ 1s, reset counter for 1s
+	if (timer1_cnt == 30)
+ 1ec:	80 91 64 00 	lds	r24, 0x0064	; 0x800064 <timer1_cnt>
+ 1f0:	90 91 65 00 	lds	r25, 0x0065	; 0x800065 <timer1_cnt+0x1>
+ 1f4:	a0 91 66 00 	lds	r26, 0x0066	; 0x800066 <timer1_cnt+0x2>
+ 1f8:	b0 91 67 00 	lds	r27, 0x0067	; 0x800067 <timer1_cnt+0x3>
+ 1fc:	4e 97       	sbiw	r24, 0x1e	; 30
+ 1fe:	a1 05       	cpc	r26, r1
+ 200:	b1 05       	cpc	r27, r1
+ 202:	99 f5       	brne	.+102    	; 0x26a <__EEPROM_REGION_LENGTH__+0x6a>
+	{
+		PORTC ^= 0x1;
+ 204:	95 b3       	in	r25, 0x15	; 21
+ 206:	81 e0       	ldi	r24, 0x01	; 1
+ 208:	89 27       	eor	r24, r25
+ 20a:	85 bb       	out	0x15, r24	; 21
+		timer1_cnt = 0;
+ 20c:	10 92 64 00 	sts	0x0064, r1	; 0x800064 <timer1_cnt>
+ 210:	10 92 65 00 	sts	0x0065, r1	; 0x800065 <timer1_cnt+0x1>
+ 214:	10 92 66 00 	sts	0x0066, r1	; 0x800066 <timer1_cnt+0x2>
+ 218:	10 92 67 00 	sts	0x0067, r1	; 0x800067 <timer1_cnt+0x3>
+		Global_counter_1++;
+ 21c:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 220:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 224:	a0 91 62 00 	lds	r26, 0x0062	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
+ 228:	b0 91 63 00 	lds	r27, 0x0063	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
+ 22c:	01 96       	adiw	r24, 0x01	; 1
+ 22e:	a1 1d       	adc	r26, r1
+ 230:	b1 1d       	adc	r27, r1
+ 232:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 236:	90 93 61 00 	sts	0x0061, r25	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 23a:	a0 93 62 00 	sts	0x0062, r26	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
+ 23e:	b0 93 63 00 	sts	0x0063, r27	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
+		// read value adc port 7 and save to adc_value_raw
+		adc_read(7);
+ 242:	87 e0       	ldi	r24, 0x07	; 7
+ 244:	8e df       	rcall	.-228    	; 0x162 <_Z8adc_readh>
+		ADC_value = (unsigned char)(ADC_value_raw * 500 / 1023); // temporature
+ 246:	40 91 6e 00 	lds	r20, 0x006E	; 0x80006e <ADC_value_raw>
+ 24a:	50 91 6f 00 	lds	r21, 0x006F	; 0x80006f <ADC_value_raw+0x1>
+ 24e:	24 ef       	ldi	r18, 0xF4	; 244
+ 250:	31 e0       	ldi	r19, 0x01	; 1
+ 252:	42 9f       	mul	r20, r18
+ 254:	c0 01       	movw	r24, r0
+ 256:	43 9f       	mul	r20, r19
+ 258:	90 0d       	add	r25, r0
+ 25a:	52 9f       	mul	r21, r18
+ 25c:	90 0d       	add	r25, r0
+ 25e:	11 24       	eor	r1, r1
+ 260:	6f ef       	ldi	r22, 0xFF	; 255
+ 262:	73 e0       	ldi	r23, 0x03	; 3
+ 264:	70 d0       	rcall	.+224    	; 0x346 <__udivmodhi4>
+ 266:	60 93 6d 00 	sts	0x006D, r22	; 0x80006d <ADC_value>
+	}
+	if (Global_counter_1 == 5)
+ 26a:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 26e:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 272:	a0 91 62 00 	lds	r26, 0x0062	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
+ 276:	b0 91 63 00 	lds	r27, 0x0063	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
+ 27a:	05 97       	sbiw	r24, 0x05	; 5
+ 27c:	a1 05       	cpc	r26, r1
+ 27e:	b1 05       	cpc	r27, r1
+ 280:	59 f4       	brne	.+22     	; 0x298 <__EEPROM_REGION_LENGTH__+0x98>
+	{
+		uart_send_flag = true;
+ 282:	81 e0       	ldi	r24, 0x01	; 1
+ 284:	80 93 6c 00 	sts	0x006C, r24	; 0x80006c <uart_send_flag>
+		Global_counter_1 = 0;
+ 288:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 28c:	10 92 61 00 	sts	0x0061, r1	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 290:	10 92 62 00 	sts	0x0062, r1	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
+ 294:	10 92 63 00 	sts	0x0063, r1	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
+	}
+}
+ 298:	ff 91       	pop	r31
+ 29a:	ef 91       	pop	r30
+ 29c:	bf 91       	pop	r27
+ 29e:	af 91       	pop	r26
+ 2a0:	9f 91       	pop	r25
+ 2a2:	8f 91       	pop	r24
+ 2a4:	7f 91       	pop	r23
+ 2a6:	6f 91       	pop	r22
+ 2a8:	5f 91       	pop	r21
+ 2aa:	4f 91       	pop	r20
+ 2ac:	3f 91       	pop	r19
+ 2ae:	2f 91       	pop	r18
+ 2b0:	0f 90       	pop	r0
+ 2b2:	0f be       	out	0x3f, r0	; 63
+ 2b4:	0f 90       	pop	r0
+ 2b6:	1f 90       	pop	r1
+ 2b8:	18 95       	reti
+
+000002ba <__vector_9>:
+// TIMER0 overflow interrupt service routine
+// called whenever TCNT0 overflows
+ISR(TIMER0_OVF_vect)
+{
+ 2ba:	1f 92       	push	r1
+ 2bc:	0f 92       	push	r0
+ 2be:	0f b6       	in	r0, 0x3f	; 63
+ 2c0:	0f 92       	push	r0
+ 2c2:	11 24       	eor	r1, r1
+ 2c4:	2f 93       	push	r18
+ 2c6:	8f 93       	push	r24
+ 2c8:	9f 93       	push	r25
+ 2ca:	af 93       	push	r26
+ 2cc:	bf 93       	push	r27
+	// keep a track of number of overflows
+	timer0_cnt++;
+ 2ce:	80 91 68 00 	lds	r24, 0x0068	; 0x800068 <timer0_cnt>
+ 2d2:	90 91 69 00 	lds	r25, 0x0069	; 0x800069 <timer0_cnt+0x1>
+ 2d6:	a0 91 6a 00 	lds	r26, 0x006A	; 0x80006a <timer0_cnt+0x2>
+ 2da:	b0 91 6b 00 	lds	r27, 0x006B	; 0x80006b <timer0_cnt+0x3>
+ 2de:	01 96       	adiw	r24, 0x01	; 1
+ 2e0:	a1 1d       	adc	r26, r1
+ 2e2:	b1 1d       	adc	r27, r1
+ 2e4:	80 93 68 00 	sts	0x0068, r24	; 0x800068 <timer0_cnt>
+ 2e8:	90 93 69 00 	sts	0x0069, r25	; 0x800069 <timer0_cnt+0x1>
+ 2ec:	a0 93 6a 00 	sts	0x006A, r26	; 0x80006a <timer0_cnt+0x2>
+ 2f0:	b0 93 6b 00 	sts	0x006B, r27	; 0x80006b <timer0_cnt+0x3>
+	if (timer0_cnt == 3000)
+ 2f4:	80 91 68 00 	lds	r24, 0x0068	; 0x800068 <timer0_cnt>
+ 2f8:	90 91 69 00 	lds	r25, 0x0069	; 0x800069 <timer0_cnt+0x1>
+ 2fc:	a0 91 6a 00 	lds	r26, 0x006A	; 0x80006a <timer0_cnt+0x2>
+ 300:	b0 91 6b 00 	lds	r27, 0x006B	; 0x80006b <timer0_cnt+0x3>
+ 304:	88 3b       	cpi	r24, 0xB8	; 184
+ 306:	9b 40       	sbci	r25, 0x0B	; 11
+ 308:	a1 05       	cpc	r26, r1
+ 30a:	b1 05       	cpc	r27, r1
+ 30c:	41 f4       	brne	.+16     	; 0x31e <__vector_9+0x64>
+	{
+		// PORTC ^= 0x03;
+		timer0_cnt = 0;
+ 30e:	10 92 68 00 	sts	0x0068, r1	; 0x800068 <timer0_cnt>
+ 312:	10 92 69 00 	sts	0x0069, r1	; 0x800069 <timer0_cnt+0x1>
+ 316:	10 92 6a 00 	sts	0x006A, r1	; 0x80006a <timer0_cnt+0x2>
+ 31a:	10 92 6b 00 	sts	0x006B, r1	; 0x80006b <timer0_cnt+0x3>
+		
+	}
+}
+ 31e:	bf 91       	pop	r27
+ 320:	af 91       	pop	r26
+ 322:	9f 91       	pop	r25
+ 324:	8f 91       	pop	r24
+ 326:	2f 91       	pop	r18
+ 328:	0f 90       	pop	r0
+ 32a:	0f be       	out	0x3f, r0	; 63
+ 32c:	0f 90       	pop	r0
+ 32e:	1f 90       	pop	r1
+ 330:	18 95       	reti
+
+00000332 <__vector_11>:
+
+
+ISR(USART_RXC_vect)
+{
+ 332:	1f 92       	push	r1
+ 334:	0f 92       	push	r0
+ 336:	0f b6       	in	r0, 0x3f	; 63
+ 338:	0f 92       	push	r0
+ 33a:	11 24       	eor	r1, r1
+	//uart_char_rx(Uart_data_ptr);
+}
+ 33c:	0f 90       	pop	r0
+ 33e:	0f be       	out	0x3f, r0	; 63
+ 340:	0f 90       	pop	r0
+ 342:	1f 90       	pop	r1
+ 344:	18 95       	reti
+
+00000346 <__udivmodhi4>:
+ 346:	aa 1b       	sub	r26, r26
+ 348:	bb 1b       	sub	r27, r27
+ 34a:	51 e1       	ldi	r21, 0x11	; 17
+ 34c:	07 c0       	rjmp	.+14     	; 0x35c <__udivmodhi4_ep>
+
+0000034e <__udivmodhi4_loop>:
+ 34e:	aa 1f       	adc	r26, r26
+ 350:	bb 1f       	adc	r27, r27
+ 352:	a6 17       	cp	r26, r22
+ 354:	b7 07       	cpc	r27, r23
+ 356:	10 f0       	brcs	.+4      	; 0x35c <__udivmodhi4_ep>
+ 358:	a6 1b       	sub	r26, r22
+ 35a:	b7 0b       	sbc	r27, r23
+
+0000035c <__udivmodhi4_ep>:
+ 35c:	88 1f       	adc	r24, r24
+ 35e:	99 1f       	adc	r25, r25
+ 360:	5a 95       	dec	r21
+ 362:	a9 f7       	brne	.-22     	; 0x34e <__udivmodhi4_loop>
+ 364:	80 95       	com	r24
+ 366:	90 95       	com	r25
+ 368:	bc 01       	movw	r22, r24
+ 36a:	cd 01       	movw	r24, r26
+ 36c:	08 95       	ret
+
+0000036e <_exit>:
+ 36e:	f8 94       	cli
+
+00000370 <__stop_program>:
+ 370:	ff cf       	rjmp	.-2      	; 0x370 <__stop_program>
